@@ -123,20 +123,9 @@ setMethod("NeighbRasterStack", signature(x = "RasterLayer", weights = "ANY", nei
           function(x, weights, neighb) {
 
               categories <- neighb@categories
-              calls <- list()
-              maps  <- list()
-              
-              for (i in 1:length(categories)) {
-                  r <- (x == categories[i])
-                  cl <- neighb@calls[[i]]
-                  cl$x <- r
-                  maps[[i]] <- eval(cl)
-                  cl$x <- NA  ## set this to NA to save space
-                  calls[[i]] <- cl
-              }
-              maps <- stack(maps)
-              out <- new("NeighbRasterStack", maps, calls=calls, categories=categories)  
-              
+              weights <- lapply(neighb@calls, FUN=function(neighbLayer) {neighbLayer$w})
+              out <- NeighbRasterStack(x=x, weights=weights, categories=categories, fun=mean, ...)
+               
               ##out <- do.call("NeighbRasterStack", c(list(x=x, categories=neighb@categories, weights=neighb@weights, fun=neighb@fun), neighb@focal.args))              
           }
 )

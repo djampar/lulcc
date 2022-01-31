@@ -117,7 +117,7 @@ setMethod("CluesModel", signature(obs = "ObsLulcRasterStack", ef = "ExpVarRaster
               } 
 
               if (!is.null(neighb) && !is.null(nb.rules)) {
-                  if (length(nb.rules) != nlayer(neighb)) {
+                  if (length(nb.rules) != nlayers(neighb)) {
                       stop("rule should be provided for each neighbourhood map")
                   }
                   
@@ -253,7 +253,7 @@ setMethod("OrderedModel", signature(obs = "ObsLulcRasterStack", ef = "ExpVarRast
               } 
 
               if (!is.null(neighb) && !is.null(nb.rules)) {
-                  if (length(nb.rules) != length(neighb)) {
+                  if (length(nb.rules) != nlayers(neighb)) {
                       stop("rule should be provided for each neighbourhood map")
                   }
                   

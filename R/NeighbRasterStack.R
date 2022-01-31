@@ -120,7 +120,7 @@ setMethod("NeighbRasterStack", signature(x = "RasterLayer", weights = "matrix", 
 #' @rdname NeighbRasterStack
 #' @aliases NeighbRasterStack,RasterLayer,ANY,NeighbRasterStack-method
 setMethod("NeighbRasterStack", signature(x = "RasterLayer", weights = "ANY", neighb="NeighbRasterStack"),
-          function(x, weights, neighb) {
+          function(x, weights, neighb,...) {
 
               categories <- neighb@categories
               weights <- lapply(neighb@calls, FUN=function(neighbLayer) {neighbLayer$w})
